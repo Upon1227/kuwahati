@@ -20,7 +20,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            movedir.z = Input.GetAxis("Vertical") * moveSpeed;
+            movedir.z = -Input.GetAxis("Vertical") * moveSpeed;
 
             movedir.x =  Input.GetAxis("Horizontal") * moveSpeed;
 
