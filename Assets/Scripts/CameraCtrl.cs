@@ -29,7 +29,7 @@ public class CameraCtrl : MonoBehaviour
             float mouseInputX = Input.GetAxis("Mouse X");
             float mouseInputY = Input.GetAxis("Mouse Y");
             // targetの位置のY軸を中心に、回転（公転）する
-            transform.RotateAround(mousePos, Vector3.up, mouseInputX * Time.deltaTime * 500f);
+            transform.RotateAround(mousePos, Vector3.up, -mouseInputX * Time.deltaTime * 500f);
             // カメラの垂直移動（※角度制限なし、必要が無ければコメントアウト）
             // transform.RotateAround(mousePos, transform.right, mouseInputY * Time.deltaTime * 300f);
         }

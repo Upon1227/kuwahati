@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
     }
@@ -29,6 +31,23 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            anim.SetTrigger("JDance");
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            anim.SetTrigger("YDance");
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            anim.SetTrigger("SDance");
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         SetMoveAnim();
     }
     private void FixedUpdate()
@@ -77,11 +96,13 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "BreakStone")
         {
+            Debug.Log("Stone");
             // 武器を持っていて、スペースボタンを押したとき
-            if (Input.GetKeyDown(KeyCode.Space) && isBreak)
+            if (Input.GetKeyDown(KeyCode.Space) /*&& isBreak*/)
             {
                 // ここに殴るモーションアニメ入れる
-                collision.gameObject.SetActive(false);
+                anim.SetTrigger("isattack");
+                StartCoroutine(Blake(collision.gameObject));
             }         
         }
         
@@ -97,5 +118,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    IEnumerator Blake(GameObject collision)
+    {
+        yield return new WaitForSeconds(2);
+        collision.gameObject.SetActive(false);
+    }
 }
 
