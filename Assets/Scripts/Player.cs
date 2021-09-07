@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
 
     private bool isBreak = false;
 
+    [SerializeField]
+    private GameObject Balu;
+
+    [SerializeField]
+    public GameObject text_g,text_g1,text_g2;
 
 
     // Start is called before the first frame update
@@ -34,6 +39,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isBreak)
+        {
+            Balu.SetActive(true);
+        }
         if (Input.GetKeyDown(KeyCode.G))
         {
             anim.SetTrigger("JDance");
@@ -99,6 +108,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "BreakStone")
         {
+            if (isBreak)
+            {
+                text_g.SetActive(true);
+            }
             Debug.Log("Stone");
             // 武器を持っていて、スペースボタンを押したとき
             if (Input.GetKeyDown(KeyCode.Space) && isBreak)
@@ -108,36 +121,55 @@ public class Player : MonoBehaviour
                 StartCoroutine(Blake(collision.gameObject));
             }         
         }
-       
-        
+        if (collision.gameObject.tag == "Youmuin")
+        {
+            text_g1.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("isBreakがTrue");
+                anim.SetTrigger("isattack");
+
+                StartCoroutine(Attack(collision.gameObject));
+            }
+        }
+
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.tag == "Youmuin")
+        {
+            text_g1.SetActive(false);
+        }
+        if (collision.gameObject.tag == "BreakStone")
+        {
+            text_g.SetActive(false);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Youmuin")
-        {
-
-            Debug.Log("isBreakがTrue");
-            anim.SetTrigger("isattack");
-            
-            StartCoroutine(Attack(collision.gameObject));
-
-            // 用務員殴る　
-            // 武器のセットアクティブをtrueにする
-        }
+  
     }
     float impulse = 300;
     IEnumerator Attack(GameObject collison)
     {
-        yield return new WaitForSeconds(1.5f);
 
-        Rigidbody rb2 = collison.gameObject.GetComponent<Rigidbody>();
-        rb2.AddForce(Vector3.up * impulse, ForceMode.Impulse);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(collison.gameObject);
+        text_g2.SetActive(true);
+        //Rigidbody rb2 = collison.gameObject.GetComponent<Rigidbody>();
+        //  rb2.AddForce(Vector3.up * impulse, ForceMode.Impulse);
         isBreak = true; // 用務員を殴ると武器が手に入る
+        yield return new WaitForSeconds(2);
+        text_g2.SetActive(false);
     }
     IEnumerator Blake(GameObject collision)
     {
         yield return new WaitForSeconds(2);
         collision.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1);
+        text_g.SetActive(false);
     }
 }
 
