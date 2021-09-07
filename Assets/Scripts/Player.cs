@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     private bool isBreak = false;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -98,26 +101,39 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Stone");
             // 武器を持っていて、スペースボタンを押したとき
-            if (Input.GetKeyDown(KeyCode.Space) /*&& isBreak*/)
+            if (Input.GetKeyDown(KeyCode.Space) && isBreak)
             {
                 // ここに殴るモーションアニメ入れる
                 anim.SetTrigger("isattack");
                 StartCoroutine(Blake(collision.gameObject));
             }         
         }
+       
         
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
         if (collision.gameObject.tag == "Youmuin")
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("isBreakがTrue");
-                isBreak = true;　// 用務員を殴ると武器が手に入る
-            }           
+
+            Debug.Log("isBreakがTrue");
+            anim.SetTrigger("isattack");
+            
+            StartCoroutine(Attack(collision.gameObject));
+
             // 用務員殴る　
             // 武器のセットアクティブをtrueにする
         }
     }
+    float impulse = 300;
+    IEnumerator Attack(GameObject collison)
+    {
+        yield return new WaitForSeconds(1.5f);
 
+        Rigidbody rb2 = collison.gameObject.GetComponent<Rigidbody>();
+        rb2.AddForce(Vector3.up * impulse, ForceMode.Impulse);
+        isBreak = true; // 用務員を殴ると武器が手に入る
+    }
     IEnumerator Blake(GameObject collision)
     {
         yield return new WaitForSeconds(2);
