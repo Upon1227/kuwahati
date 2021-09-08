@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     public GameObject text_g,text_g1,text_g2;
 
+    [SerializeField]
+    private SceneChange sceneChange;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P)) // ゲームオーバー遷移仮
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            sceneChange.GameOver();
+        }
+        if(Input.GetKeyDown(KeyCode.O)) // ゲームクリア遷移仮
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            sceneChange.Clear();
+        }
+
+
         if (isBreak)
         {
             Balu.SetActive(true);
