@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e681af969a65b40ceb7fce1074ffbbea, type: 3}
+  m_Name: AudioParamsSO
+  m_EditorClassIdentifier: 
+  BGMVolume: 0
+  SEVolume: 0
+  OPThemeVolume: 0
+  FieldVolume: 0
+  DanceVolume: 0
+  EndVolume: 0
+  UhoVolume: 0
+  UkiVolume: 0
+  DamageVolume: 0
+  GameOverVolume: 0
+  KnockOutVolume: 0
+  BreakVolume: 0
+  FeelGoodVolume: 0
+  BooingVolume: 0
+  WalkVolume: 0
+  BikeVolume: 0
+  BikeRunVolume: 0
