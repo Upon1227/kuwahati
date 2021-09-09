@@ -4,40 +4,37 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Animator anim;
+    public bool isStop;
+    public float movespeed;
+    private void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Ray();
-        Move();
-    }
-    private void Ray()
-    {
-        Ray ray = new Ray(transform.position, new Vector3(0, 0, -1));
-
-        RaycastHit hit;
-
-        //Rayの飛ばせる距離
-        int distance = 100;
-
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.red);
-
-        if (Physics.Raycast(ray, out hit, distance))
+        if(isStop == false)
         {
-            //Rayが当たったオブジェクトのtagがPlayerだったら
-            if (hit.collider.tag == "Player")
-                Debug.Log("RayがPlayerに当たった");
+            transform.position -= new Vector3(movespeed, 0, 0);
         }
     }
-    private void Move()
-    {
-        float moveArea = 50f;
 
-        transform.position = new Vector3(Mathf.Sin(Time.time) * moveArea, transform.position.y, transform.position.z);
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Stop")
+        {
+            anim.SetBool("isStop", true);
+            isStop = true;
+            StartCoroutine(startmove());
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+        if (other.gameObject.tag == "Des")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator startmove()
+    {
+        yield return new WaitForSeconds(3);
+        anim.SetBool("isStop", false);
+        isStop = false;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }

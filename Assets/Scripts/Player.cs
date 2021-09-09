@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private Rigidbody rb;
@@ -25,8 +25,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     public GameObject text_g,text_g1,text_g2;
 
-    
+    public Slider slid;
+    public float v = 0;
 
+    bool isY, isJ, isS, isMove;
 
     // Start is called before the first frame update
     void Start()
@@ -47,27 +49,55 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             sceneChange.GameOver();
         }*/
-        
+        slid.value = v;
+
+        if(slid.value >= 100)
+        {
+            GameObject S = GameObject.Find("Scenechange");
+            S.GetComponent<SceneChange>().GameOver();
+        }
         if (isBreak)
         {
             Balu.SetActive(true);
            
         }
+
+
         if (Input.GetKeyDown(KeyCode.G))
         {
+            //3秒後
+            if (LockManager.isLock && isJ == false)
+            {
+                isJ = true;
+                v -= Random.Range(5, 10);
+            }
             anim.SetTrigger("JDance");
             DanceBGM();
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
+            //5秒後
+            if (LockManager.isLock && isY == false)
+            {
+                isY = true;
+                v -= Random.Range(5, 10);
+            }
             anim.SetTrigger("YDance");
             DanceBGM();
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
+            //16秒
+            if (LockManager.isLock && isS == false)
+            {
+                isS = true;
+                v -= Random.Range(5, 10);
+            }
             anim.SetTrigger("SDance");
             DanceBGM();
         }
+
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
@@ -136,6 +166,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "BreakStone")
         {
+            
             if (isBreak)
             {
                 text_g.SetActive(true);
@@ -144,6 +175,10 @@ public class Player : MonoBehaviour
             // 武器を持っていて、スペースボタンを押したとき
             if (Input.GetKeyDown(KeyCode.Space) && isBreak)
             {
+                if (LockManager.isLock)
+                {
+                    v += Random.Range(10, 15);
+                }
                 // ここに殴るモーションアニメ入れる
                 anim.SetTrigger("isattack");
                 StartCoroutine(Blake(collision.gameObject));
@@ -168,7 +203,16 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "Youmuin")
         {
-            text_g1.SetActive(false);
+            if (LockManager.isLock)
+            {
+                GameObject S = GameObject.Find("Scenechange");
+                S.GetComponent<SceneChange>().GameOver();
+            }
+            else
+            {
+                text_g1.SetActive(false);
+            }
+          
         }
         if (collision.gameObject.tag == "BreakStone")
         {
