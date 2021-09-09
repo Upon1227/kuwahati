@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     public GameObject text_g,text_g1,text_g2;
 
-    [SerializeField]
-    private SceneChange sceneChange;
+    
 
 
     // Start is called before the first frame update
@@ -42,20 +41,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)) // ゲームオーバー遷移仮
+        /*if(Input.GetKeyDown(KeyCode.P)) // ゲームオーバー遷移仮
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             sceneChange.GameOver();
-        }
-        if(Input.GetKeyDown(KeyCode.O)) // ゲームクリア遷移仮
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            sceneChange.Clear();
-        }
-
-
+        }*/
+        
         if (isBreak)
         {
             Balu.SetActive(true);
@@ -197,6 +189,7 @@ public class Player : MonoBehaviour
         SoundManager.instance.PlaySE(SoundManager.SE.KnockOut);
         yield return new WaitForSeconds(0.6f);
         Destroy(collison.gameObject);
+        text_g1.SetActive(false);
         text_g2.SetActive(true);
         //Rigidbody rb2 = collison.gameObject.GetComponent<Rigidbody>();
         //  rb2.AddForce(Vector3.up * impulse, ForceMode.Impulse);
