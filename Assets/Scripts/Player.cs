@@ -59,26 +59,45 @@ public class Player : MonoBehaviour
         if (isBreak)
         {
             Balu.SetActive(true);
+           
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
             anim.SetTrigger("JDance");
+            DanceBGM();
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
             anim.SetTrigger("YDance");
+            DanceBGM();
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
             anim.SetTrigger("SDance");
+            DanceBGM();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            SoundManager.instance.PlaySE(SoundManager.SE.Uho);
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SoundManager.instance.PlaySE(SoundManager.SE.Uki);
+        }
+
         SetMoveAnim();
     }
+    void DanceBGM()
+    {
+        SoundManager.instance.StopSE();
+        SoundManager.instance.PlaySE(SoundManager.SE.Dance);
+    }
+
     private void FixedUpdate()
     {     
         // カメラの方向から、X-Z平面の単位ベクトルを取得
@@ -171,8 +190,12 @@ public class Player : MonoBehaviour
     float impulse = 300;
     IEnumerator Attack(GameObject collison)
     {
-
-        yield return new WaitForSeconds(1.5f);
+        SoundManager.instance.PlaySE(SoundManager.SE.Uki);
+        yield return new WaitForSeconds(1.2f);
+        SoundManager.instance.PlaySE(SoundManager.SE.Damage);
+        yield return new WaitForSeconds(0.2f);
+        SoundManager.instance.PlaySE(SoundManager.SE.KnockOut);
+        yield return new WaitForSeconds(0.6f);
         Destroy(collison.gameObject);
         text_g2.SetActive(true);
         //Rigidbody rb2 = collison.gameObject.GetComponent<Rigidbody>();
@@ -183,7 +206,10 @@ public class Player : MonoBehaviour
     }
     IEnumerator Blake(GameObject collision)
     {
-        yield return new WaitForSeconds(2);
+        SoundManager.instance.PlaySE(SoundManager.SE.Uki);
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.instance.PlaySE(SoundManager.SE.Break);
+        yield return new WaitForSeconds(0.5f);
         collision.gameObject.SetActive(false);
         yield return new WaitForSeconds(1);
         text_g.SetActive(false);

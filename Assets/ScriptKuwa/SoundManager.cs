@@ -29,7 +29,6 @@ public class SoundManager : MonoBehaviour
     {
         OPTheme,//
         Field,
-        Dance,
         End,
         
     }
@@ -47,6 +46,7 @@ public class SoundManager : MonoBehaviour
         Walk,
         Bike,
         BikeRun,
+        Dance,
 
     }
 
@@ -69,7 +69,10 @@ public class SoundManager : MonoBehaviour
     {
         bgmAudioSource.Stop();
     }
-
+    public void StopSE()
+    {
+        seAudioSource.Stop();
+    }
 
 
     public void PlayBGM(BGM bgm)

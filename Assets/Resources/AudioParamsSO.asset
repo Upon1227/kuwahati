@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e681af969a65b40ceb7fce1074ffbbea, type: 3}
   m_Name: AudioParamsSO
   m_EditorClassIdentifier: 
-  BGMVolume: 0
-  SEVolume: 0
-  OPThemeVolume: 0
-  FieldVolume: 0
-  DanceVolume: 0
-  EndVolume: 0
-  UhoVolume: 0
-  UkiVolume: 0
-  DamageVolume: 0
-  GameOverVolume: 0
-  KnockOutVolume: 0
-  BreakVolume: 0
-  FeelGoodVolume: 0
-  BooingVolume: 0
-  WalkVolume: 0
-  BikeVolume: 0
-  BikeRunVolume: 0
+  BGMVolume: 1
+  SEVolume: 1
+  OPThemeVolume: 1
+  FieldVolume: 1
+  DanceVolume: 1
+  EndVolume: 1
+  UhoVolume: 1
+  UkiVolume: 1
+  DamageVolume: 1
+  GameOverVolume: 1
+  KnockOutVolume: 1
+  BreakVolume: 1
+  FeelGoodVolume: 1
+  BooingVolume: 1
+  WalkVolume: 1
+  BikeVolume: 1
+  BikeRunVolume: 1
