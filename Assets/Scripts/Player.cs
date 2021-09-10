@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
 
     bool isY, isJ, isS, isMove;
 
+    public GameObject ti;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -199,8 +201,9 @@ public class Player : MonoBehaviour
             }
             Debug.Log("Stone");
             // 武器を持っていて、スペースボタンを押したとき
-            if (Input.GetKeyDown(KeyCode.Space) && isBreak)
+            if (Input.GetKeyDown(KeyCode.Space) && isBreak && isMove == false)
             {
+                isMove = true;
                 if (LockManager.isLock)
                 {
                     SoundManager.instance.PlaySE(SoundManager.SE.Booing);
@@ -260,6 +263,7 @@ public class Player : MonoBehaviour
         SoundManager.instance.PlaySE(SoundManager.SE.KnockOut);
         yield return new WaitForSeconds(0.6f);
         Destroy(collison.gameObject);
+        Instantiate(ti, new Vector3(collison.transform.position.x,collison.transform.position.y + 10, collison.transform.position.z), Quaternion.identity);
         text_g1.SetActive(false);
         text_g2.SetActive(true);
         //Rigidbody rb2 = collison.gameObject.GetComponent<Rigidbody>();
@@ -277,6 +281,7 @@ public class Player : MonoBehaviour
         collision.gameObject.SetActive(false);
         yield return new WaitForSeconds(1);
         text_g.SetActive(false);
+        isMove = false;
     }
 }
 
