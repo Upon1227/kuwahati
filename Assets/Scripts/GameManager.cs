@@ -28,7 +28,12 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
+        if(SceneManager.GetActiveScene().name == "GameOver")
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         if(SceneManager.GetActiveScene().name == "Clear" && isClear)
         {
             naichilab.RankingLoader.Instance.SendScoreAndShowRanking ((int) Mathf.Ceil(clearTime));

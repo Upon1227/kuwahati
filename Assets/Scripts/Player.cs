@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
             SoundManager.instance.PlaySE(SoundManager.SE.Dance1);
             if (LockManager.isLock && isJ == false)
             {
-                
+                StartCoroutine(StopJ());   
                 isJ = true;
                 v -= Random.Range(5, 10);
                 SoundManager.instance.PlaySE(SoundManager.SE.FeelGood);
@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
             SoundManager.instance.PlaySE(SoundManager.SE.Dance2);
             if (LockManager.isLock && isY == false)
             {
+                StartCoroutine(StopY());
                 isY = true;
                 v -= Random.Range(5, 10);
                 SoundManager.instance.PlaySE(SoundManager.SE.FeelGood);
@@ -99,6 +100,7 @@ public class Player : MonoBehaviour
             SoundManager.instance.PlaySE(SoundManager.SE.Dance3);
             if (LockManager.isLock && isS == false)
             {
+                StartCoroutine(StopS());
                 isS = true;
                 v -= Random.Range(5, 10);
                 SoundManager.instance.PlaySE(SoundManager.SE.FeelGood);
@@ -125,7 +127,21 @@ public class Player : MonoBehaviour
         SetMoveAnim();
     }
     
-
+    IEnumerator StopJ()
+    {
+        yield return new WaitForSeconds(3);
+        isJ = false;
+    }
+    IEnumerator StopY()
+    {
+        yield return new WaitForSeconds(3);
+        isY = false;
+    }
+    IEnumerator StopS()
+    {
+        yield return new WaitForSeconds(3);
+        isS = false;
+    }
     private void FixedUpdate()
     {     
         // カメラの方向から、X-Z平面の単位ベクトルを取得
@@ -144,29 +160,33 @@ public class Player : MonoBehaviour
     }
     private void SetMoveAnim()
     {
-        horizontal = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        vertical = Input.GetAxisRaw("Vertical") * moveSpeed;
+        if(isJ == false && isY == false && isS == false)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal") * moveSpeed;
+            vertical = Input.GetAxisRaw("Vertical") * moveSpeed;
 
-        if (horizontal == 0 && vertical == 0)　// アイドル
-        {
-            anim.SetFloat("Speed", 0f);
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.LeftShift))　// ダッシュ
+            if (horizontal == 0 && vertical == 0) // アイドル
             {
-                anim.SetFloat("Speed", 8f);
-                moveSpeed = maxMoveSpeed;
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                moveSpeed = 6f;
+                anim.SetFloat("Speed", 0f);
             }
             else
             {
-                anim.SetFloat("Speed", 2f);　// 歩く
+                if (Input.GetKey(KeyCode.LeftShift)) // ダッシュ
+                {
+                    anim.SetFloat("Speed", 8f);
+                    moveSpeed = maxMoveSpeed;
+                }
+                else if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    moveSpeed = 6f;
+                }
+                else
+                {
+                    anim.SetFloat("Speed", 2f); // 歩く
+                }
             }
         }
+    
     }
     private void OnCollisionStay(Collision collision)
     {
