@@ -66,35 +66,45 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             //3秒後
+            
+            SoundManager.instance.PlaySE(SoundManager.SE.Dance1);
             if (LockManager.isLock && isJ == false)
             {
+                
                 isJ = true;
                 v -= Random.Range(5, 10);
+                SoundManager.instance.PlaySE(SoundManager.SE.FeelGood);
             }
             anim.SetTrigger("JDance");
-            DanceBGM();
+            
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
             //5秒後
+            
+            SoundManager.instance.PlaySE(SoundManager.SE.Dance2);
             if (LockManager.isLock && isY == false)
             {
                 isY = true;
                 v -= Random.Range(5, 10);
+                SoundManager.instance.PlaySE(SoundManager.SE.FeelGood);
             }
             anim.SetTrigger("YDance");
-            DanceBGM();
+            
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
             //16秒
+            
+            SoundManager.instance.PlaySE(SoundManager.SE.Dance3);
             if (LockManager.isLock && isS == false)
             {
                 isS = true;
                 v -= Random.Range(5, 10);
+                SoundManager.instance.PlaySE(SoundManager.SE.FeelGood);
             }
             anim.SetTrigger("SDance");
-            DanceBGM();
+            
         }
 
 
@@ -114,11 +124,7 @@ public class Player : MonoBehaviour
 
         SetMoveAnim();
     }
-    void DanceBGM()
-    {
-        SoundManager.instance.StopSE();
-        SoundManager.instance.PlaySE(SoundManager.SE.Dance);
-    }
+    
 
     private void FixedUpdate()
     {     
@@ -177,6 +183,7 @@ public class Player : MonoBehaviour
             {
                 if (LockManager.isLock)
                 {
+                    SoundManager.instance.PlaySE(SoundManager.SE.Booing);
                     v += Random.Range(10, 15);
                 }
                 // ここに殴るモーションアニメ入れる

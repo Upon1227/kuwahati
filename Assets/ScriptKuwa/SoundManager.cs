@@ -46,7 +46,10 @@ public class SoundManager : MonoBehaviour
         Walk,
         Bike,
         BikeRun,
-        Dance,
+        Dance1,
+        Dance2,
+        Dance3,
+
 
     }
 

@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMVolume: 1
   SEVolume: 1
-  OPThemeVolume: 1
+  OPThemeVolume: 0.69
   FieldVolume: 1
-  DanceVolume: 1
-  EndVolume: 1
+  EndVolume: 0.79
   UhoVolume: 1
   UkiVolume: 1
   DamageVolume: 1
@@ -25,7 +24,10 @@ MonoBehaviour:
   KnockOutVolume: 1
   BreakVolume: 1
   FeelGoodVolume: 1
-  BooingVolume: 1
+  BooingVolume: 0.82
   WalkVolume: 1
   BikeVolume: 1
   BikeRunVolume: 1
+  Dance1Volume: 1
+  Dance2Volume: 1
+  Dance3Volume: 1

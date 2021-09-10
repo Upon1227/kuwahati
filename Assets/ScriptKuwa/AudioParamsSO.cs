@@ -45,7 +45,11 @@ public class AudioParamsSO : ScriptableObject
     [Range(0, 1)]
     public float BikeRunVolume;
     [Range(0, 1)]
-    public float DanceVolume;
+    public float Dance1Volume;
+    [Range(0, 1)]
+    public float Dance2Volume;
+    [Range(0, 1)]
+    public float Dance3Volume;
 
     public float GetVolume(SoundManager.BGM bgm)
     {
@@ -91,8 +95,12 @@ public class AudioParamsSO : ScriptableObject
                 return BikeVolume * SEVolume;
             case SoundManager.SE.BikeRun:
                 return BikeRunVolume * SEVolume;
-            case SoundManager.SE.Dance:
-                return DanceVolume * SEVolume;
+            case SoundManager.SE.Dance1:
+                return Dance1Volume * SEVolume;
+            case SoundManager.SE.Dance2:
+                return Dance2Volume * SEVolume;
+            case SoundManager.SE.Dance3:
+                return Dance3Volume * SEVolume;
 
         }
         return 0;

@@ -327,7 +327,7 @@ MonoBehaviour:
   bgmClips:
   - {fileID: 8300000, guid: 10b9b8c2cab6c44db85c8e4c4a10052e, type: 3}
   - {fileID: 8300000, guid: 7705bcf4942a942f2956bfc100598269, type: 3}
-  - {fileID: 8300000, guid: 094b55ed51f944265932b4106ae41d7b, type: 3}
+  - {fileID: 8300000, guid: 7f867f7d8b2bd412fb4610b942c4d84d, type: 3}
   seClips:
   - {fileID: 8300000, guid: b0229549502d34cc8be8f6d35d726aec, type: 3}
   - {fileID: 8300000, guid: 2184ca4b397274e7a8db9d09b9d53dbb, type: 3}
@@ -340,7 +340,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97d9f0f4ade0e413c80e774176da0f86, type: 3}
   - {fileID: 8300000, guid: 3e662c8ed9d454548bf6f8b4728d0d9a, type: 3}
   - {fileID: 8300000, guid: fdede191243c74c24b88a34606306690, type: 3}
-  - {fileID: 8300000, guid: 094b55ed51f944265932b4106ae41d7b, type: 3}
+  - {fileID: 8300000, guid: 95940e3bcc29e43a9b7e6b51ca75b60d, type: 3}
+  - {fileID: 8300000, guid: dc7af24050d01405790b908f0403e80f, type: 3}
+  - {fileID: 8300000, guid: aa49e5ca5c5b6424a85a178055641f37, type: 3}
 --- !u!82 &233115388
 AudioSource:
   m_ObjectHideFlags: 0
@@ -725,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e260e7e36dc0c6b42a5eb9ff974c346c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isClear: 0
 --- !u!4 &377674678
 Transform:
   m_ObjectHideFlags: 0
